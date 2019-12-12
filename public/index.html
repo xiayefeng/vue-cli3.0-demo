@@ -3,15 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>vue-cli3.0-demo</title>
+    <% for (let css of htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+      <link href="<%= css %>" rel="stylesheet">
+    <% } %>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but vue-cli3.0-demo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
+    <% for (let js in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+      <script src="<%= js %>"></script>
+    <% } %>
     <!-- built files will be auto injected -->
   </body>
 </html>
