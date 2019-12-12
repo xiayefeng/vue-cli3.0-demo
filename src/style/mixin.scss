@@ -1,0 +1,199 @@
+@mixin clearfix {
+	&:before,
+	&:after {
+		content: '';
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin radius($radius: 4px) {
+	border-radius: $radius;
+}
+
+@mixin border($color: #ccc, $border: 1px, $type: solid) {
+	border: $border $type $color;
+}
+
+@mixin img-responsive($display: block) {
+	display: $display;
+	max-width: 100%;
+	height: auto;
+}
+
+@mixin gradient-left() {
+	background: -webkit-linear-gradient(right, #fff 0, #eee 100%);
+	background: -moz-linear-gradient(right, #fff 0, #eee 100%);
+	background: linear-gradient(to left, #fff 0, #eee 100%);
+}
+
+@mixin text-overflow {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: break-all;
+}
+
+@mixin text-ellipsis($line: 2) {
+	display: -webkit-box;
+	-webkit-line-clamp: $line;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+}
+@mixin size($width, $height) {
+	width: $width;
+	height: $height;
+	box-sizing: border-box;
+}
+
+@mixin square($width) {
+	@include size($width, $width);
+}
+
+%left {
+	float: left;
+}
+
+%right {
+	float: right;
+}
+
+%abs {
+	position: absolute;
+}
+
+%abs-center {
+	@extend %abs;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+%rel {
+	position: relative;
+}
+
+%fix {
+	position: fixed;
+}
+
+%flex {
+	display: flex;
+	align-items: center;
+}
+
+%flex-a {
+	@extend %flex;
+	justify-content: space-around;
+}
+
+%flex-b {
+	@extend %flex;
+	justify-content: space-between;
+}
+
+%flex-c {
+	@extend %flex;
+	justify-content: center;
+}
+
+%table {
+	margin-bottom: 80px;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+/* 不可选中 */
+%unselected {
+	user-select: none;
+}
+
+// 下箭头
+%down-arrow {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 30px;
+	margin-right: 20px;
+
+	&::after {
+		display: inline-block;
+		content: ' ';
+		height: 18px;
+		width: 18px;
+		border-width: 0 2px 2px 0;
+		border-color: #999999;
+		border-style: solid;
+		transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+		transform-origin: center;
+		transition: transform 0.3s;
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		margin-top: -10rpx;
+	}
+}
+
+// 下箭头
+%down-arrow {
+	display: inline-block;
+	position: relative;
+	width: 40px;
+	height: 30px;
+	margin-right: 20px;
+
+	&::after {
+		display: inline-block;
+		content: ' ';
+		height: 18px;
+		width: 18px;
+		border-width: 0 2px 2px 0;
+		border-color: #999999;
+		border-style: solid;
+		transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+		transform-origin: center;
+		transition: transform 0.3s;
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		margin-top: -10rpx;
+	}
+
+	// 加上active旋转成 上箭头
+	&.active::after {
+		transform-origin: center;
+		transform: rotate(-135deg);
+		transition: transform 0.3s;
+	}
+}
+
+%triangle {
+	display: inline-block;
+	position: relative;
+	margin-left: 10px;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top-color: #ccc;
+}
+
+@media (min-width: 721px) {
+	$d-w: 2;
+	$is-phone: 0;
+}
+
+@function dw($value) {
+	//   $val: if($dev == 'browse', $value / $d-w * 1rem, $value * 1rpx);
+	//   @return $val
+	@if $dev == 'phone' {
+		@return $value / $d-w * 1rem;
+	} @else if $dev == 'desktop' {
+		@return $value / 32 * 1rem;
+	} @else {
+		@return $value * 1rpx;
+	}
+	//  @return $value / $d-w * 1rem
+}
